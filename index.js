@@ -126,7 +126,7 @@ client.on("interactionCreate", async interaction => {
 	else if (commandName === "next-birthday") {
 
 		var date, age, member;
-		for (var i = 2; i < data.length; i++) {
+		for (var i = 0; i < data.length; i++) {
 			var memberDate = new Date(data[i]["year"], data[i]["month"], data[i]["day"]);
 
 			date = memberDate;
