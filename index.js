@@ -6,6 +6,7 @@ const { join } = require('node:path')
 const cron = require("node-cron")
 const { token, guildId, channelId, voiceChannelId } = require("./config.json")
 const data = require("./data.json")
+const fs = require("fs");
 
 // Constantes et variables globales
 const CHANNEL = channelId
@@ -75,6 +76,11 @@ client.once("clientReady", () => {
 
 // Envoi des messages d'anniversaire
 client.on("clientReady", () => {
+	// Heartbeat every 30 seconds
+	setInterval(() => {
+		fs.writeFileSync("/tmp/healthcheck", Date.now().toString())
+	}, 30_000)
+
 	cron.schedule("0 0 9 * * *", async () => {
 		let today = new Date()
 
